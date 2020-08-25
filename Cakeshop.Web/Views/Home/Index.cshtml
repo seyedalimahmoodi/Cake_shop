@@ -1,0 +1,146 @@
+﻿@using Cakeshop.Core.DTOs.Products
+@using Cakeshop.DataLayer.Entities.Shop
+@using System.Diagnostics.Tracing
+@model IEnumerable<Cakeshop.Core.DTOs.Products.ShowProductListItemViewModel>
+@{
+    ViewData["Title"] = "خانه";
+    List<Shop> shops = ViewData["Shops"] as List<Shop>;
+}
+
+
+<!--Start Slider-->
+<section id="home-section" class="hero">
+    <div class="home-slider owl-carousel">
+        <div class="slider-item" style="background-image: url('شمع/1540990546_dsc_0645.jpg');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+                    <div class="col-md-12 ftco-animate text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-item" style="background-image: url('شمع/candles.jpg');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+                    <div class="col-sm-12 ftco-animate text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-item" style="background-image: url('شمع/شمع-تولد-زیبا-1.jpg');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+                    <div class="col-sm-12 ftco-animate text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-item" style="background-image: url('شمع/عکس-شمع-و-گل-5.jpg');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+                    <div class="col-sm-12 ftco-animate text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-item" style="background-image: url('شمع/151202705696194244178602431576814524816207.jpg');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+                    <div class="col-sm-12 ftco-animate text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Slider-->
+<!--Tozihat-->
+<section class="ftco-section">
+    <div class="container">
+        <div class="row no-gutters ftco-services">
+            <div class="col-md-4 text-center d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services mb-md-0 mb-4">
+                    <div class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
+                        <span class="flaticon-shipped"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">ارسال رایگان</h3>
+                        <span>برای سفارش های بالای 100 هزارتومان</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services mb-md-0 mb-4">
+                    <div class="icon bg-color-3 d-flex justify-content-center align-items-center mb-2">
+                        <span class="flaticon-award"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">کیفیت برتر</h3>
+                        <span>محصولات با کیفیت</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services mb-md-0 mb-4">
+                    <div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
+                        <span class="flaticon-customer-service"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">پشتیبانی</h3>
+                        <span>پشتیبانی 24 ساعته</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Tozihat-->
+
+<section class="ftco-section alert-info">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4">محصولات</h2>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <partial name="_BoxProduct" model="@item" />
+            }
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4">پر فروشترین ها</h2>
+
+            </div>
+        </div>
+    </div>
+    <div class="container alert alert-warning">
+        <div class="row p-1">
+            @{
+                List<ShowProductListItemViewModel> popular = ViewBag.PopularProduct as List<ShowProductListItemViewModel>;
+            }
+            @if (popular != null)
+            {
+                foreach (var item in popular)
+                {
+                    <partial name="_BoxProduct" model="@item" />
+                }
+            }
+        </div>
+    </div>
+</section>

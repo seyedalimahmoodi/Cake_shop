@@ -1,0 +1,28 @@
+﻿@model Cakeshop.Core.DTOs.Products.ShowProductListItemViewModel
+<div class="col-md-6 col-lg-3 ftco-animate">
+    <div class="product bg-white">
+        <a href="/ShowProduct/@Model.ProductId"><img class="card-img-top thumbnail" src="/product/image/@Model.ImageName" /></a>
+        <div class="text py-3 pb-4 px-3 text-center">
+            <h3><a href="/ShowProduct/@Model.ProductId">@Model.Title</a></h3>
+            <div class="d-flex">
+                <div class="pricing">
+                    <p class="price">
+                        <span class="price-sale"> @Model.Price.ToString("#,0")</span>
+                        <span class="price-sale"> تومان</span>
+                    </p>
+                </div>
+            </div>
+            <div class="bottom-area d-flex px-3">
+                <div class="m-auto d-flex">
+                    <a href="/ShowProduct/@Model.ProductId"
+                       class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                        <span><i class="ion-ios-menu"></i></span>
+                    </a>
+                    <a asp-area="UserPanel" asp-controller="MyOrders" asp-action="AddToCart" asp-route-productId="@Model.ProductId" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                        <span><i class="ion-ios-cart"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

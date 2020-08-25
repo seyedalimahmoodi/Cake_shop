@@ -1,0 +1,108 @@
+﻿@using Cakeshop.DataLayer.Entities.Product
+@using Cakeshop.DataLayer.Entities.Shop
+@model Tuple<List<Cakeshop.Core.DTOs.Products.ShowProductListItemViewModel>, int>
+@{
+    ViewData["Title"] = "محصولات";
+    List<ProductGroup> groups = ViewBag.Groups as List<ProductGroup>;
+    List<int> selected = ViewBag.selectedGroups as List<int>;
+}
+
+<section class="ftco-section">
+    <div class="container">
+        <form id="formFilter" action="/Product" method="get">
+            <input type="hidden" id="pageid" name="pageId" value="@ViewBag.pageId.ToString()"/>
+            <div class="row justify-content-center">
+                <div class="col-md-10 mb-5 text-center">
+                        <div class="sidebar-box align-content-center">
+                            <div class="form-group">
+                                <input onchange="changeGroup()" name="filter" type="text" class="form-control" placeholder="جست و جو...">
+                            </div>
+                        </div>
+                        <hr>
+                        <ul class="product-category row">
+
+                            @foreach (var group in groups.Where(g => g.ParentId == null))
+                            {
+                                <li class="row col-5">
+                                    <div class="custom-control custom-checkbox row">
+                                        <input onchange="changeGroup()" @((selected.Any(s => s == group.GroupId) ? "checked" : "")) name="selectedGroups" value="@group.GroupId" type="checkbox" class="custom-control-input" id="@group.GroupId">
+                                        <label class="custom-control-label" for="@group.GroupId"> @group.GroupTitle</label>
+                                    </div>
+
+                                    @if (groups.Any(g => g.ParentId == group.GroupId))
+                                    {
+                                        <ul class="row col-10 container">
+                                            @foreach (var sub in groups.Where(g => g.ParentId == group.GroupId))
+                                            {
+                                                <li class="form-check">
+                                                    <div class="custom-control custom-checkbox ">
+                                                        <input onchange="changeGroup()" @((selected.Any(s => s == sub.GroupId) ? "checked" : "")) name="selectedGroups" value="@sub.GroupId" type="checkbox" class="custom-control-input" id="@sub.GroupId">
+                                                        <label class="custom-control-label" for="@sub.GroupId"> @sub.GroupTitle</label>
+                                                    </div>
+
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+
+                                </li>
+                            }
+                            <span class="col-2"></span>
+
+                        </ul>
+
+                        <hr>
+                        <div class="row card">
+                            <div class="select-wrap card-body form-inline justify-content-center">
+                                <select onchange="changeGroup()" name="orderByType" class="form-control-sm filter col-md-3 col-sm-5">
+                                    <option value="نزولی">نزولی</option>
+                                    <option value="صعودی">صعودی</option>
+                                </select>
+
+                                <a class="btn btn-danger filter" href="/Product">حذف فیلتر ها</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </form>
+        <div class="row">
+            @foreach (var item in Model.Item1)
+            {
+                <partial name="_BoxProduct" model="@item"/>
+            }
+        </div>
+        @if (Model.Item2 > 1)
+        {
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="block-27">
+                        <ul>
+
+                            @for (int i = 1; i <= (int) Model.Item2; i++)
+                            {
+                                <li><a onclick="changePage(@i)" href="#">@i</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</section>
+@section Scripts
+{
+    <script>
+        function changePage(pageid) {
+            $("#pageid").val(pageid);
+            $("#formFilter").submit();
+        }
+        function changeGroup() {
+            $("#formFilter").submit();
+        }
+    </script>
+
+}
+

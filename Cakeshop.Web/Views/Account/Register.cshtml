@@ -1,0 +1,38 @@
+﻿@model Cakeshop.Core.DTOs.Users.RegisterViewModel
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+
+<section class="ftco-section container col-lg-5 col-md-7 col-sm-10 col-xl-12">
+    <div class="container bg-colorform  card" id="log-in-form">
+        <div class="heading card-header">
+            <h1>ثبت نام در سایت</h1>
+        </div>
+        <form asp-action="Register" method="post" class="card-body">
+            <div class="form-group">
+                <input asp-for="UserName" type="text" class="form-control" placeholder="نام کاربری">
+                <span class="text-danger" asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Email" type="text" class="form-control" placeholder="آدرس ایمیل">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="RePassword" type="password" class="form-control" placeholder="تکرار رمز عبور">
+                <span class="text-danger" asp-validation-for="RePassword"></span>
+            </div>
+            <div class="form-group form-group-btn">
+                <button type="submit" class="btn btn-success btn-lg">ثبت نام</button>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group">
+                <p>اگر حساب کاربری دارید <a class="text-warning" href="/login">وارد</a> شوید.</p>
+            </div>
+        </form>
+    </div>
+</section>
+

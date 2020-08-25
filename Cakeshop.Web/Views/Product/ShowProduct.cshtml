@@ -1,0 +1,116 @@
+﻿@using Remotion.Linq.Parsing.Structure.IntermediateModel
+@model Cakeshop.DataLayer.Entities.Product.Product
+@{
+    ViewData["Title"] = Model.ProductTitle;
+}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 ftco-animate fadeInUp ftco-animated">
+                <a href="/product/image/@Model.ProductImageName" class="image-popup"><img src="/product/image/@Model.ProductImageName" class="img-fluid col-10"></a>
+            </div>
+            <div class="col-lg-6 product-details pl-md-5 ftco-animate fadeInUp ftco-animated">
+                <h3>@Model.ProductTitle</h3>
+                <div class="rating d-flex">
+                </div>
+                <p class="price"><span>@Model.ProductPrice.ToString("#,0") تومان</span></p>
+                <p>
+                    @Html.Raw(Model.ProductDescription)
+                </p>
+                <br />
+                @if (Model.IsExist)
+                {
+                    <p><a asp-area="UserPanel" asp-controller="MyOrders" asp-action="AddToCart" asp-route-productId="@Model.ProductId" class="btn btn-black py-3 px-5 ">اضافه به سبد خرید </a></p>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        متاسفانه در حال حاضر این محصول موجود نیست.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<div id="accordion">
+    <div class="card">
+        <div class="card-header bg bg-light" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn mycolor" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <h4>مشاهده نظرات و سوالات</h4>
+                </button>
+                <button class="btn mycolor2 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <h4>ارسال نظر</h4>
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <div class="col-md-10">
+
+                    <ul class="comment-list card-body" id="listComment">
+
+                    </ul>
+                    <!-- END comment-list -->
+                    
+                </div>
+            </div>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+
+                <div class="comment-form-wrap col-md-9">
+                    <h3 class="mb-5">تجربه خود را با ما در میان بگذارید</h3>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form asp-controller="Product" asp-action="CreateComment"
+                              data-ajax="true"
+                              data-ajax-method="post"
+                              data-ajax-mode="replace"
+                              data-ajax-update="#listComment"
+                              data-ajax-success="Success" class="p-5 bg-light">
+                            <input type="hidden" name="comment.ProductId" value="@Model.ProductId" />
+                            <div class="form-group">
+                                <label for="message">پیام</label>
+                                <textarea name="comment.Comment" placeholder="متن نظر " id="comment_Comment" cols="30" rows="4" class="form-control"></textarea>
+                            </div>
+                            <span asp-validation-for="ProductComments"></span>
+                            <div class="form-group">
+                                <input type="submit" value="ارسال پیام" class="btn py-3 px-4 btn-primary">
+                            </div>
+                        </form>
+                    }
+
+                    else
+                    {
+                        <div class="alert alert-danger">
+                            جهت درج پیام باید وارد سایت شوید
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+@section Scripts
+{
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function Success() {
+            $("#comment_Comment").val("");
+        }
+
+        $(function() {
+            $("#listComment").load("/Product/ShowComment/" + @Model.ProductId);
+
+        });
+
+        function pageComment(pageid) {
+            $("#listComment").load("/Product/ShowComment/" + @Model.ProductId+"?pageId="+pageid);
+        }
+    </script>
+}

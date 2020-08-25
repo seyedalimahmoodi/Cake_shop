@@ -1,0 +1,74 @@
+﻿@model List<Cakeshop.Core.DTOs.Orders.ShowOrderViewModel>
+
+@{
+    ViewData["Title"] = "سبد خرید";
+   
+}
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
+                <div class="cart-list">
+                    @if (Model.Any())
+                    {
+
+                        <table class="table table-striped table-sm table-bordered">
+                            <thead class="bg-light">
+                                <tr class="text-center">
+                                    <th>&nbsp;</th>
+                                    <th>لیست محصولات</th>
+                                    <th>نام محصول</th>
+                                    <th>قیمت</th>
+                                    <th>تعداد</th>
+                                    <th>جمع</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg bg-white">
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="text-center">
+                                        <td class="product-remove"><a class=" bg-danger" asp-controller="MyOrders" asp-action="Delete" asp-route-id="@item.OrderDetailId"><span class="ion-ios-close"></span></a></td>
+
+                                        <td class="image-prod">
+                                            <div class="img" style="background-image: url(/product/image/@item.ImageName);"></div>
+                                        </td>
+
+                                        <td class="product-name">
+                                            <h3>@item.Title</h3>
+                                        </td>
+
+                                        <td class="price">@item.Price</td>
+
+                                        <td class="quantity">
+                                            <a href="/userpanel/MyOrders/UpdateCount/@item.OrderDetailId?command=up" class="btn icon-arrow-up"></a>
+                                            <label>@item.Count</label>
+                                            <a href="/userpanel/MyOrders/UpdateCount/@item.OrderDetailId?command=down" class="btn icon-arrow-down"></a>
+                                        </td>
+
+                                        <td class="total">@item.Sum</td>
+
+                                    </tr><!-- END TR-->
+
+                                }
+                                <tr class="text-center">
+                                    <td colspan="4" class="text-left">جمع کل :</td>
+                                    <td colspan="2" class="text-right">@Model.Sum(s => s.Sum).ToString("#,0 تومان")</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <br />
+                        <a asp-controller="MyOrders" asp-action="GetUserLocation" asp-route-orderId="@Model.First().OrderId" class="btn btn-block btn-outline btn-success"><p class="text-dark text-center">تکمیل اطلاعات و پرداخت درب منزل</p></a>
+                        <br />
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">سبد خرید شما خالی است</div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,27 @@
+﻿@using Cakeshop.Core.Convertors
+@using Cakeshop.DataLayer.Entities.Product
+@model List<Cakeshop.DataLayer.Entities.Product.ProductComment>
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <li class="comment alert bg-color-2 card">
+
+        <div class="comment-body  p-3">
+            <h3>@item.User.UserName</h3>
+            <div class="text-secondary">@item.CreateDate.ToShamsi()</div>
+            <p class="text-dark">
+                @item.Comment
+            </p>
+            @* <p><a href="#" class="reply">پاسخ</a></p> *@
+        </div>
+
+    </li>
+}
+
+
+
+

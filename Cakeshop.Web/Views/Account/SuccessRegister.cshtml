@@ -1,0 +1,13 @@
+﻿@model Cakeshop.DataLayer.Entities.User.User
+@{
+    ViewData["Title"] = "پایان ثبت نام";
+}
+
+<div class="alert alert-success text-center">
+    <h2>ثبت نام موفق</h2>
+    <hr />
+    <h3 class="text-dark">@Model.UserName عزیز :</h3>
+    <p>تبریک .ثبت نام شما با موفقیت انجام شد انجام شد ، ایمیلی حاوی لینک فعالسازی به ایمیل<span class="text-danger">"@Model.Email"</span>  ارسال شد .</p>
+    <p>جهت ادامه ثبت نام وارد ایمیل خود شوید و روی لینک کلیک کنید .</p>
+</div>
+

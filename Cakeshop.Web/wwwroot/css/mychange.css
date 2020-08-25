@@ -1,0 +1,24 @@
+.bg-colorheader{
+    background-color: rgb(241, 238, 48);
+}
+.mycolor{
+background-color: rgba(147, 241, 237, 0.486);
+}
+.mycolor2{
+    background-color: rgba(168, 241, 85, 0.678);
+}
+.bg-colorslider {
+    background: #e0e77f7a;
+}
+.bg-colorfooter{
+    background: rgba(248, 248, 142, 0.452);
+}
+.bg-colorform{
+    background: rgba(140, 240, 193, 0.171);
+}
+.filter{
+    margin: 8px 8px 8px 8px;
+}
+.link{
+    color:darkcyan;
+}

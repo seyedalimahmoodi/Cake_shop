@@ -1,0 +1,33 @@
+﻿@model Cakeshop.Core.DTOs.Users.EditProfileViewModel
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+}
+
+<section class="ftco-section bg-light">
+    <div class="container row">
+        <partial name="_SideBar" />
+        <div class="col-lg-9 col-md-8 p-2 bg-white card">
+            <p class="text-success text-lg-right">ویرایش حساب کاربری :</p>
+            <form asp-action="EditProfile" method="post" class="">
+                <div class="input-group col-lg-7 col-md-10 col-sm-10 mb-1 p-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text icon-user" id="basic-addon1"></span>
+                    </div>
+                    <input asp-for="UserName" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <span asp-validation-for="UserName" class="text-danger mr-2"></span>
+
+                <div class="input-group col-lg-7 col-md-10 col-sm-10 mb-1 p-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text icon-envelope" id="basic-addon1"></span>
+                    </div>
+                    <input asp-for="Email" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <span asp-validation-for="Email" class="text-danger mr-2"></span>
+
+                <input class="btn btn-info btn-md col-5" type="submit" value="ویرایش" />
+            </form>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,12 @@
+﻿@using Cakeshop.Core.Services.Interfaces
+@model Cakeshop.DataLayer.Entities.Order.Order
+
+@inject IUserService _UserService
+
+@{
+    ViewData["Title"] = "نمایش فاکتور";
+    int sumOrder = Model.OrderDetails.Sum(od => od.Price * od.Count);
+}
+
+
+    <h1>sfsdfs</h1>

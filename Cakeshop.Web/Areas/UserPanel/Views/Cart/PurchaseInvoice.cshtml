@@ -1,0 +1,34 @@
+﻿@model List<Cakeshop.Core.DTOs.Users.CartViewModel>
+@{
+    ViewData["Title"] = "فاکتور خرید ها";
+}
+
+    <section class="ftco-section bg-light">
+        <div class="container row">
+
+            <partial name="_SideBar" />
+            <div class="col-lg-9 col-md-8 p-2 bg-white card  table-responsive">
+                <p class="text-success p-1">خریدها</p>
+                <table class="table table-striped text-success">
+                    <tr>
+                        <th>مبلغ</th>
+                        <th>تاریخ</th>
+                        <th>شرح</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Amount.ToString("#,0 تومان")</td>
+                            <td>
+                                @item.DateTime.ToShamsi()
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </section>
+

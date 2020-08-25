@@ -1,0 +1,59 @@
+﻿@model Cakeshop.Core.DTOs.Users.LoginViewModel
+@{
+    ViewData["Title"] = "ورود";
+}
+<section class="ftco-section">
+    <div class="container col-lg-5 col-md-7 col-sm-10 col-xl-10 bg-colorform card" id="log-in-form">
+        <div class="heading card-header">
+            <h1>ورود به سایت</h1>
+        </div>
+        @if (ViewBag.EditProfile == true)
+        {
+            <div class="alert alert-secondary">
+                بدلیل ویرایش شدن اطلاعات حساب کاربری و بارگزاری مجدد اطلاعات لطفا مجدد وارد سایت شوید.
+            </div>
+        }
+        @if (ViewBag.IsSuccess != null)
+        {
+            <div class="alert alert-warning">
+                <p class="help-block">ورود با موفقیت انجام شد</p>
+            </div>
+
+            <script>
+                // Your delay in milliseconds
+                var delay = 3000;
+                setTimeout(function () { window.location = "https://Foroghefarda.ir"; }, delay);
+            </script>
+        }
+
+        <form asp-action="Login" method="post" class="card-body">
+            <div class="form-group">
+                <input asp-for="Email" type="text" class="form-control" id="username" placeholder="ایمیل">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" type="password" class="form-control" id="pwd" placeholder="رمز عبور">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input asp-for="RememberMe" type="checkbox" class="custom-control-input" id="a">
+                <label class="custom-control-label" for="a">من را به خاطر بسپار</label>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+            <br />
+            <div class="form-group">
+                <p>اگر حساب کاربری ندارید می توانید در سایت عضو <a class="text-warning" href="/Register">عضو</a> شوید.</p>
+                <a class="text-danger" href="/forgotpassword">رمز عبور خود را فراموش کرده ام</a>
+            </div>
+            <div class="form-group form-group-btn">
+                <button type="submit" class="btn btn-success btn-lg">ورود</button>
+            </div>
+
+
+        </form>
+    </div>
+</section>
+
